@@ -58,8 +58,21 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  alert("test connection")
+  window.addEventListener('keydown', (e) =>{
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`)
+    if(!audio) return;  //stop function from running if key isn't specified 
+    audio.currentTime = 0;
+    audio.play()
+    key.classList.add('playing')
+  })
 
+  function removeTransition(e) {
+    console.log(e)
+  }
+
+  const keys = document.querySelectorAll('.key')
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition))
 </script>
 
 
